@@ -39,12 +39,12 @@ dataset
   │   ├── horse.1.jpg
   │   ├── horse.2.jpg
   ├── validate
-  │    ├── cat.1.jpg
-  │    ├── cat.2.jpg
-  │    ├── dog.1.jpg
-  │    ├── dog.2.jpg
-  │    ├── horse.1.jpg
-  │    ├── horse.2.jpg
+  │   ├── cat.1.jpg
+  │   ├── cat.2.jpg
+  │   ├── dog.1.jpg
+  │   ├── dog.2.jpg
+  │   ├── horse.1.jpg
+  │   ├── horse.2.jpg
 ```
 
 - Each folder under train and validate should contain images for that particular class (e.g., cat, dog, horse).
@@ -67,9 +67,11 @@ Model Training Explanation:
 
 After running the training script, you will find the following outputs in the result folder:
 
-- `accuracy_plot.png`: This plot shows the accuracy of the model during training, indicating how well the model can classify the animals in the images. A higher accuracy means better model performance.
 
-- `loss_plot.png`: This plot shows the loss curve during training. The loss function measures how well the model is performing. As training progresses, the loss should decrease, indicating the model is learning. If the loss remains high or fluctuates, it could mean there’s an issue with the model or the dataset.
+- `training_plots.png`: This plot shows the accuracy and the loss curve during training of the model during training.
+
+Plot for comparing the model accuracy and loss:
+![Training Plots](results/training_plots.png)
 
 - `demo.mp4`: This is a video showing the model identifying animals in images. It gives a demonstration of how the trained model performs on unseen images. The video can be used to visually verify how well the model is identifying animals.
 

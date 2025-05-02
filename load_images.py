@@ -4,7 +4,6 @@ from random import shuffle
 import constants as CONST 
 import cv2
 
-
 def label_img(name):
     # Extract the label from the image filename (e.g., 'cat.1.jpg')
     word_label = name.split('.')[0]
@@ -23,8 +22,7 @@ def label_img(name):
     label_arr[label] = 1  # Set the correct class to 1
     return label_arr
 
-
-def prep_and_load_data():
+def prep_and_load_images():
     DIR = CONST.TRAIN_DIR
     data = []   # List to store image data
     labels = [] # List to store the labels
@@ -70,7 +68,6 @@ def prep_and_load_data():
 
     return data, labels
 
-
 if __name__ == "__main__":
-    prep_and_load_data()
+    prep_and_load_images()
     

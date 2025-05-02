@@ -1,6 +1,7 @@
 dataset
 .venv
 animal_detection_env
-results
+results/trained*
+results/demo.mp4
 logs
 __pycache__
