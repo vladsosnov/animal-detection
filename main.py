@@ -47,16 +47,16 @@ if __name__ == "__main__":
     data, labels = prep_and_load_images()
 
     train_size = int(CONST.DATA_SIZE * CONST.SPLIT_RATIO)
-    print('data size:', len(data), 'train size:', train_size)
+    print('Data size is:', len(data), 'Train size is:', train_size)
 
     # Split the data into training and testing data
     train_data = data[:train_size]
     train_labels = labels[:train_size]
-    print('train data fetched..')
+    print('Train data fetched..')
 
     test_data = data[train_size:]
     test_labels = labels[train_size:]
-    print('test data fetched..')
+    print('Test data fetched..')
 
     # Reshape data to match the expected input for the model
     train_images = train_data.reshape(-1, CONST.IMG_SIZE, CONST.IMG_SIZE, 3)
@@ -64,11 +64,11 @@ if __name__ == "__main__":
 
     # Now you can train the model
     model = get_model()
-    print('training started...')
+    print('Training started...')
     log_dir = os.path.join("logs", "fit", "model")
     tensorboard = TensorBoard(log_dir=log_dir, histogram_freq=1)
-    history = model.fit(train_images, train_labels, batch_size=50, epochs=3, verbose=1, validation_data=(test_images, test_labels), callbacks=[tensorboard])
-    print('training done...')
+    history = model.fit(train_images, train_labels, batch_size=50, epochs=15, verbose=1, validation_data=(test_images, test_labels), callbacks=[tensorboard])
+    print('Training done...')
 
     # Save the model
     model_file = os.path.join(results_dir, 'trained_model.h5')

@@ -29,6 +29,9 @@ def prep_and_load_images():
     image_paths = os.listdir(DIR)
     shuffle(image_paths)
     count = 0
+
+    print("Loading images from dataset...")
+
     for img_path in image_paths:
         # Skip files that are not images (optional, just to be safe)
         if not img_path.lower().endswith(('png', 'jpg', 'jpeg')):
@@ -48,7 +51,6 @@ def prep_and_load_images():
         labels.append(label)  # Append the label to the labels list
         
         count += 1
-        print(count)
         
         # Stop after reaching the specified size (CONST.DATA_SIZE)
         if count == CONST.DATA_SIZE:
@@ -60,7 +62,7 @@ def prep_and_load_images():
     data[:], labels[:] = zip(*combined)
 
     print(len(data))
-    print('done')
+    print('Images loaded successfully...')
 
     # Convert lists to NumPy arrays and return
     data = np.array(data)
