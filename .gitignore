@@ -1,0 +1,6 @@
+dataset
+.venv
+animal_detection_env
+results
+logs
+__pycache__
