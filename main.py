@@ -19,7 +19,11 @@ def plotter(history_file):
 
     # Plot accuracy
     axes[0].plot(history['accuracy'], label='Train Accuracy', color='blue', marker='o')
-    axes[0].plot(history['val_accuracy'], label='Validation Accuracy', color='green', marker='x')
+    if 'val_accuracy' in history:
+        axes[0].plot(history['val_accuracy'], label='Validation Accuracy', color='green', marker='x')
+    else:
+        print("Validation accuracy not available.")
+
     axes[0].set_title('Model Accuracy', fontsize=14)
     axes[0].set_xlabel('Epoch', fontsize=12)
     axes[0].set_ylabel('Accuracy', fontsize=12)
@@ -28,7 +32,11 @@ def plotter(history_file):
 
     # Plot loss
     axes[1].plot(history['loss'], label='Train Loss', color='red', marker='o')
-    axes[1].plot(history['val_loss'], label='Validation Loss', color='orange', marker='x')
+    if 'val_loss' in history:
+        axes[1].plot(history['val_loss'], label='Validation Loss', color='orange', marker='x')
+    else:
+        print("Validation loss not available.")
+
     axes[1].set_title('Model Loss', fontsize=14)
     axes[1].set_xlabel('Epoch', fontsize=12)
     axes[1].set_ylabel('Loss', fontsize=12)

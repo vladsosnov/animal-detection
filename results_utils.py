@@ -19,36 +19,42 @@ def process_image(directory, img_path):
 
 def video_write(model):
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter(os.path.join(results_dir, 'demo.mp4'), fourcc, 1.0, (400, 400))  # Save video in results folder
-    val_map = {2: 'Horse', 1: 'Dog', 0: 'Cat'}  # Assuming you have 3 classes: Horse, Dog, and Cat
+    out = cv2.VideoWriter(os.path.join(results_dir, 'demo.mp4'), fourcc, 1.0, (400, 400))
+    val_map = {2: 'Horse', 1: 'Dog', 0: 'Cat'}
 
     font = cv2.FONT_HERSHEY_SIMPLEX
-    location = (20, 20)
+    location = (20, 20)            # Prediction label
+    name_location = (20, 50)       # Image filename
     fontScale = 0.5
     fontColor = (255, 255, 255)
     lineType = 2
 
     DIR = CONST.TEST_DIR
     image_paths = os.listdir(DIR)
-    image_paths = image_paths[:100]  # Limiting to 100 for demo
-    count = 0
-    for img_path in image_paths:
+    image_paths = image_paths[:150]
+
+    for count, img_path in enumerate(image_paths, 1):
         image, image_std = process_image(DIR, img_path)
-        
         image_std = image_std.reshape(-1, CONST.IMG_SIZE, CONST.IMG_SIZE, 3)
+        
         pred = model.predict([image_std])
         arg_max = np.argmax(pred, axis=1)
         max_val = np.max(pred, axis=1)
         
-        # Round the max_val to 2 decimal places
         confidence = f"{max_val[0] * 100:.2f}%"
-        
-        s = val_map[arg_max[0]] + ' - ' + confidence
-        cv2.putText(image, s, location, font, fontScale, fontColor, lineType)
-        
+        label = val_map[arg_max[0]] + ' - ' + confidence
+
+        # Draw prediction
+        cv2.putText(image, label, location, font, fontScale, fontColor, lineType)
+
+        # Draw image filename
+        cv2.putText(image, f"File: {img_path}", name_location, font, fontScale, fontColor, lineType)
+
         frame = cv2.resize(image, (400, 400))
         out.write(frame)
-        
-        count += 1
-        print(count)
+
+        print(f"[{count}] Processed: {img_path}")
+    
     out.release()
+    print("Video saved to:", os.path.join(results_dir, 'demo.mp4'))
+
